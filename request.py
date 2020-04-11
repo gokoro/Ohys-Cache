@@ -41,9 +41,19 @@ def main():
             searchOriginalRes = requests.post(searchURL, searchData).text
             srResponse = json.loads(searchOriginalRes)
 
-            seriesData = {
-                'series': item['title'] #srResponse[0]['series']
-            }
+            try:
+                seriesData = {
+                    'series': srResponse[0]['series']
+                }
+                pass
+
+            # If there is no search data
+            except:
+                seriesData = {
+                    'series': item['title']
+                }
+                pass
+
             seriesOriginalRes = requests.post(seriesURL, seriesData).text
             seResponse = json.loads(seriesOriginalRes)
             
